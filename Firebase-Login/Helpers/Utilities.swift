@@ -17,5 +17,4 @@ class Utilities {
         let password = NSPredicate(format: "SELF MATCHES %@", "^{8,}$")
         return password.evaluate(with: password)
     }
-
 }

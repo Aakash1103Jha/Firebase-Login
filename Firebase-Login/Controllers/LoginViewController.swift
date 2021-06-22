@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 class LoginViewController: UIViewController {
 
@@ -16,21 +19,54 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        errorLabel.alpha = 0
         // Do any additional setup after loading the view.
     }
-    
-    @IBAction func loginButtonPressed(_ sender: UIButton) {
+    //MARK: - Validation
+    func showError(_ message: String) {
+        errorLabel.text = message
+        errorLabel.alpha = 1
     }
     
-    /*
-    // MARK: - Navigation
+    func checkFields() -> String? {
+        // check if email and password exists
+        if (loginEmailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+                loginPasswordField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "") {
+            return "Please fill in all fields"
+        }
+        return nil
+    }
+    
+    //MARK: - Transition to Homepage
+    func transitionToHome() {
+        let HomeVC = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
+        view.window?.rootViewController = HomeVC
+        view.window?.makeKeyAndVisible()
+    }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //MARK: - User Action - Login
+    @IBAction func loginButtonPressed(_ sender: UIButton) {
+        // validate text fields
+        let error = checkFields()
+        if error != nil {
+            showError(error!)
+        } else {
+            // clean user input
+            let email = self.loginEmailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let password = self.loginPasswordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            // signing in the user
+            Auth.auth().signIn(withEmail: email, password: password) { result, err in
+                if err != nil {
+                    self.showError(err!.localizedDescription)
+                } else {
+                    //finally login user
+                    self.transitionToHome()
+                }
+            }
+        }
+        
     }
-    */
+    
 
 }
