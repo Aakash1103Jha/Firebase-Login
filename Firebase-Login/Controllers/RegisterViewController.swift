@@ -59,6 +59,12 @@ class RegisterViewController: UIViewController {
         view.window?.makeKeyAndVisible()
     }
     
+    func transitionToLogin() {
+        let LoginVC = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.loginViewController) as? LoginViewController
+        view.window?.rootViewController = LoginVC
+        view.window?.makeKeyAndVisible()
+    }
+    
     //MARK: - User Action
     @IBAction func registerButtonPressed(_ sender: UIButton) {
         // validate fields
@@ -86,7 +92,7 @@ class RegisterViewController: UIViewController {
                         }
                     }
                     // transition to homepage
-                    self.transitionToHome()
+                    self.transitionToLogin()
                     
                     }
                 }
