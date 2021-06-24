@@ -60,7 +60,7 @@ class HomeViewController: UIViewController {
         view.window?.makeKeyAndVisible()
     }
     
-    func signoutUser() {
+    @objc func signoutUser() {
         do {
             try Auth.auth().signOut()
             self.transitionToLogin()
@@ -76,6 +76,11 @@ class HomeViewController: UIViewController {
         
         // get details from user collection for logged in user based on uid
         getUserDetails()
+        
+        // embed in NavigationController
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(signoutUser))
+        navigationItem.title = "My Profile"
+        
     }
     
    
