@@ -39,8 +39,13 @@ class LoginViewController: UIViewController {
     //MARK: - Transition to Homepage
     func transitionToHome() {
         let HomeVC = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
-        view.window?.rootViewController = HomeVC
-        view.window?.makeKeyAndVisible()
+        if let homeVC = HomeVC {
+            let navigationController = UINavigationController(rootViewController: homeVC)
+            view.window?.rootViewController = navigationController
+            view.window?.makeKeyAndVisible()
+        }
+        
+       
     }
 
     //MARK: - User Action - Login
