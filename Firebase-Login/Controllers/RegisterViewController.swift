@@ -86,11 +86,14 @@ class RegisterViewController: UIViewController {
                 } else {
                     // finally create user
                     let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: ["fname": firstName, "lname": lastName, "uid": result!.user.uid]) {error in
-                        if error != nil {
-                            self.showError("User data could not be saved :(")
+                    if let results = result {
+                        db.collection("users").addDocument(data: ["fname": firstName, "lname": lastName, "uid": results.user.uid]) {error in
+                            if error != nil {
+                                self.showError("User data could not be saved :(")
+                            }
                         }
                     }
+                    
                     // transition to homepage
                     self.transitionToLogin()
                     
