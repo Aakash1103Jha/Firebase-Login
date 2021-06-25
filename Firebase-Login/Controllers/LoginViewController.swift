@@ -33,6 +33,8 @@ class LoginViewController: UIViewController {
                 loginPasswordField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "") {
             return "Please fill in all fields"
         }
+        // validate password
+
         return nil
     }
     
@@ -44,6 +46,7 @@ class LoginViewController: UIViewController {
             view.window?.rootViewController = navigationController
             view.window?.makeKeyAndVisible()
         }
+        
         
        
     }

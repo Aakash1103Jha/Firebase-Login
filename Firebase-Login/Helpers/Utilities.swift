@@ -12,9 +12,9 @@ import UIKit
 class Utilities {
 
     static func isPasswordValid(_ password: String) -> Bool {
-        // return error message if password is not valid
-//        let password = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}$")
-        let password = NSPredicate(format: "SELF MATCHES %@", "^{8,}$")
-        return password.evaluate(with: password)
+//        let format = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()\\-_=+{}|?>.<,:;~`’]{8,}$"
+//        let format = "^.{8,}$"
+        let format = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]).{8,}$")
+        return format.evaluate(with: password)
     }
 }

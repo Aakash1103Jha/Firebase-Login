@@ -45,10 +45,10 @@ class RegisterViewController: UIViewController {
         }
         //TODO: -Implement RegEx for password validation
         // check if password is valid
-//        let cleanPassword = regPasswordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-//        if Utilities.isPasswordValid(cleanPassword) == false {
-//            return "Password must contain at least 8 characters, one uppercase, one nuber and a special character."
-//        }
+        let cleanPassword = regPasswordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if Utilities.isPasswordValid(cleanPassword) == false {
+            return "Password must contain at least 8 characters, one uppercase, one number and a special character."
+        }
         return nil
     }
     
