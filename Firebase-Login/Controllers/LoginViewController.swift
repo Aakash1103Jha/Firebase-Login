@@ -53,14 +53,23 @@ class LoginViewController: UIViewController {
 
     //MARK: - User Action - Login
     @IBAction func loginButtonPressed(_ sender: UIButton) {
+        
+        let activity = UIActivityIndicatorView(style: .large)
+        activity.center = self.view.center
+        self.view.addSubview(activity)
+        activity.startAnimating()
+        
         // validate text fields
         let error = checkFields()
         if error != nil {
             showError(error!)
+            activity.stopAnimating()
         } else {
             // clean user input
             let email = self.loginEmailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = self.loginPasswordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            
             
             // signing in the user
             Auth.auth().signIn(withEmail: email, password: password) { result, err in
@@ -69,6 +78,7 @@ class LoginViewController: UIViewController {
                 } else {
                     //finally login user
                     self.transitionToHome()
+                    activity.stopAnimating()
                 }
             }
         }

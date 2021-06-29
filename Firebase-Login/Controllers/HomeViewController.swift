@@ -18,7 +18,6 @@ class HomeViewController: UIViewController {
     
     let db = Firestore.firestore()
     let loggedUser = Auth.auth().currentUser
-
     
     func getUserDetails() {
         // get user uid
